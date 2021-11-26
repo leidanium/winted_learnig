@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :addresses
   resources :articles
   resources :article_attributes
