@@ -1,0 +1,2 @@
+module ArticleAttributesHelper
+end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @article_attribute.value %>
+</p>
+
+<p>
+  <strong>References:</strong>
+  <%= @article_attribute.references %>
+</p>
+
+<%= link_to 'Edit', edit_article_attribute_path(@article_attribute) %> |
+<%= link_to 'Back', article_attributes_path %>
