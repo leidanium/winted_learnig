@@ -1,10 +1,10 @@
-<%= form_with(model: attribute, local: true) do |form| %>
-  <% if attribute.errors.any? %>
+<%= form_with(model: characteristic, local: true) do |form| %>
+  <% if characteristic.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(attribute.errors.count, "error") %> prohibited this attribute from being saved:</h2>
+      <h2><%= pluralize(characteristic.errors.count, "error") %> prohibited this characteristic from being saved:</h2>
 
       <ul>
-        <% attribute.errors.full_messages.each do |message| %>
+        <% characteristic.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :v_type %>
-    <%= form.select :v_type, options_for_select(Attribute.v_types.keys.to_a) %>
+    <%= form.number_field :v_type %>
   </div>
 
   <div class="actions">

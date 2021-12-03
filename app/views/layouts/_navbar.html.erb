@@ -1,6 +1,6 @@
 <%= link_to  "Article", articles_path %>
 <%= link_to  "Category", categories_path %>
-<%= link_to  "Attributes", attributes_path %>
+<%= link_to  "Characteristics", characteristics_path %>
 
 <% if user_signed_in? %>
     <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %><<%= t(:log_out) %><% end %>

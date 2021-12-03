@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_102220) do
+ActiveRecord::Schema.define(version: 2021_12_03_112044) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 2021_12_03_102220) do
     t.index ["category_id"], name: "index_article_categories_on_category_id"
   end
 
+  create_table "article_characteristics", force: :cascade do |t|
+    t.string "value"
+    t.integer "article_id", null: false
+    t.integer "characteristics_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_article_characteristics_on_article_id"
+    t.index ["characteristics_id"], name: "index_article_characteristics_on_characteristics_id"
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.float "price"
@@ -50,16 +60,16 @@ ActiveRecord::Schema.define(version: 2021_12_03_102220) do
     t.index ["address_id"], name: "index_articles_on_address_id"
   end
 
-  create_table "attributes", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "v_type"
+    t.boolean "main"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "characteristics", force: :cascade do |t|
     t.string "name"
-    t.boolean "main"
+    t.integer "v_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -85,5 +95,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_102220) do
   add_foreign_key "article_attributes", "articles"
   add_foreign_key "article_categories", "articles"
   add_foreign_key "article_categories", "categories"
+  add_foreign_key "article_characteristics", "articles"
+  add_foreign_key "article_characteristics", "characteristics", column: "characteristics_id"
   add_foreign_key "articles", "addresses"
 end

@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  resources :characteristics
   devise_for :users
   resources :addresses
-  resources :articles
-  resources :article_attributes
-  resources :attributes
+  resources :articles do
+    collection do
+      get :buy
+    end
+  end
+  resources :article_characteristics
   resources :categories
 
   root to: "articles#index"
