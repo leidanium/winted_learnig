@@ -1,3 +1,10 @@
 <%= link_to  "Article", articles_path %>
 <%= link_to  "Category", categories_path %>
 <%= link_to  "Attributes", attributes_path %>
+
+<% if user_signed_in? %>
+    <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %><<%= t(:log_out) %><% end %>
+<% else %>
+    <%= link_to new_user_registration_path, class: 'btn btn-success' do %><i class="fas fa-sign-in-alt"></i> Inscription<% end %>
+    <%= link_to new_user_session_path, class: 'btn btn-success' do %><i class="fas fa-sign-in-alt"></i> Connexion<% end %>
+<% end %>

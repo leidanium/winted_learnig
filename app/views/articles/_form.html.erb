@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :condition %>
-    <%= form.number_field :condition %>
+    <%= form.select :condition, options_for_select(Article.conditions.keys.to_a) %>
   </div>
 
   <div class="actions">

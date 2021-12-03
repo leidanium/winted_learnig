@@ -4,5 +4,5 @@ class Article < ApplicationRecord
     # has_many :attributes, through: :article_attributes
     has_one :address
 
-    enum condition: ["neuf", "bon_etat", "pour_piece"]
+    enum condition: ["neuf", "bon etat", "pour piece"]
 end
