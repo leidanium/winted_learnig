@@ -5,7 +5,12 @@ class SoldsController < ApplicationController
 
   # GET /solds or /solds.json
   def index
-    @solds = Sold.where(user_id: current_user.id)
+    @solds = Sold.includes(:article).where(user_id: current_user.id)
+  end
+
+  def sell_index
+    my_articles_ids = current_user.articles.ids
+    @solds = Sold.includes(:article).where(article_id: my_articles_ids)
   end
 
   # GET /solds/1 or /solds/1.json

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :solds do 
+  resources :solds do
     collection do
       get :sold_proposal
+      get :sell_index
     end
   end
   resources :characteristics

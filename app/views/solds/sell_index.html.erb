@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Article</th>
+      <th>Propose par</th>
       <th>Price</th>
       <th>Closed</th>
       <th colspan="3"></th>
@@ -16,6 +17,7 @@
     <% @solds.each do |sold| %>
       <tr>
         <td><%= sold.article.name %></td>
+        <td><%= sold.user.email %></td>
         <td><%= sold.price %></td>
         <td><%= sold.closed %></td>
         <td><%= link_to 'Show', sold %></td>
