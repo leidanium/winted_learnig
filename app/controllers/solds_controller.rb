@@ -1,7 +1,7 @@
 class SoldsController < ApplicationController
   before_action :authenticate_user!
-  #TODO before_action :check_permission
-  before_action :set_sold, only: %i[ show edit update destroy ]
+  before_action :set_sold, only: %i[ show edit update destroy accept refuse]
+  before_action :check_permission, only: %i[accept refuse]
 
   # GET /solds or /solds.json
   def index
@@ -78,6 +78,37 @@ class SoldsController < ApplicationController
     end
   end
 
+  def accept
+    @sold.accept = true
+    close_sold
+
+    respond_to do |format|
+      if @sold.save
+        acceptance_propagate
+        format.html { redirect_to sell_index_solds_path, notice: "La vente a bien ete accepté" }
+        format.json { render :show, status: :created, location: @sold }
+      else
+        format.html { render sell_index_solds_path, status: :unprocessable_entity }
+        format.json { render json: @sold.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def refuse
+    @sold.accept = false
+    close_sold
+
+    respond_to do |format|
+      if @sold.save
+        format.html { redirect_to sell_index_solds_path, notice: "La refus a bien ete appliqué" }
+        format.json { render :show, status: :created, location: @sold }
+      else
+        format.html { render sell_index_solds_path, status: :unprocessable_entity }
+        format.json { render json: @sold.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sold
@@ -91,5 +122,26 @@ class SoldsController < ApplicationController
 
     def sold_proposal_params
       params.permit(:article_id)
+    end
+
+    def check_permission
+      # byebug
+      if current_user.id != @sold&.article&.user_id
+        redirect_to sell_index_solds_path, alert: "Action non autorisé"
+      end
+    end
+
+    def close_sold
+      @sold.closed = true
+    end
+
+    def acceptance_propagate
+      update_article_sold
+      other_solds = Sold.where(article_id: @sold.article_id).where.not(id: @sold.id)
+      other_solds.update_all(closed: true, accept: false)
+    end
+
+    def update_article_sold
+      article = @sold.article.update(sold: true)
     end
 end

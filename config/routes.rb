@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     collection do
       get :sold_proposal
       get :sell_index
+      get :accept
+      get :refuse
     end
   end
   resources :characteristics

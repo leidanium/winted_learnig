@@ -20,9 +20,18 @@
         <td><%= sold.user.email %></td>
         <td><%= sold.price %></td>
         <td><%= sold.closed %></td>
-        <td><%= link_to 'Show', sold %></td>
-        <td><%= link_to 'Edit', edit_sold_path(sold) %></td>
-        <td><%= link_to 'Destroy', sold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if sold.closed %>
+          <td rowspan="2">
+              <% if sold.accept %>
+                Accepté le
+              <% else %>
+                Refusé le
+              <% end %> <%= sold.updated_at.strftime("%d/%m/%y") %>
+          </td>
+        <% else %>
+          <td><%= link_to  "Accepter", accept_solds_path(id: sold.id) %></td>
+          <td><%= link_to  "Reffuser", refuse_solds_path(id: sold.id) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_095258) do
+ActiveRecord::Schema.define(version: 2021_12_10_102450) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_095258) do
     t.boolean "closed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "accept"
     t.index ["article_id"], name: "index_solds_on_article_id"
     t.index ["user_id"], name: "index_solds_on_user_id"
   end
