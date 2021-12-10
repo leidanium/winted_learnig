@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :solds do 
+    collection do
+      get :sold_proposal
+    end
+  end
   resources :characteristics
   devise_for :users
   resources :addresses
