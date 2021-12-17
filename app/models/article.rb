@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
 
     has_many :article_categories
-    has_many :categories, dependant: :delete_all
+    has_many :categories
 
     has_many :article_characteristics, dependent: :destroy
     has_many :characteristics, through: :article_characteristics
