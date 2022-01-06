@@ -9,5 +9,7 @@ class Article < ApplicationRecord
     has_one :address
     belongs_to :user
 
+    has_many_attached :images
+
     enum condition: ["neuf", "bon etat", "pour piece"]
 end
