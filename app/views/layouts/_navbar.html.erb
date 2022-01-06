@@ -3,6 +3,7 @@
 <%= link_to  "Characteristics", characteristics_path %>
 <%= link_to  "Mes Proposition d'achat", solds_path %>
 <%= link_to  "Mes Proposition de ventes", sell_index_solds_path %>
+<%= link_to "Mon Profil", edit_user_registration_path %>
 
 <% if user_signed_in? %>
     <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %><<%= t(:log_out) %><% end %>
