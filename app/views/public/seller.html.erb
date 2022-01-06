@@ -1,0 +1,16 @@
+<div>
+  <% if @seller.avatar.attached?%>
+    <%= image_tag( url_for(@seller.avatar) , :alt => "avatar") %>
+  <% end %>
+</div>
+
+<div>
+    <p> <%= @seller.pseudo %></p>
+    <p> <%= @seller.tel %></p>
+</div>
+
+
+
+
+
+

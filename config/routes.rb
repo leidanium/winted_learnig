@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'public/seller'
   resources :solds do
     collection do
       get :sold_proposal
