@@ -5,6 +5,12 @@
   <%= @article.name %>
 </p>
 
+<div class="m-4"> 
+  <% @article.categories.each do |c| %>
+    <p> <%= c.name %></p>
+  <% end %>
+</div>
+
 <div>
       <% if @article.images.attached? %>
         <div id="carouselExampleSlidesOnly" class="carousel slide carou-size" data-ride="carousel">

@@ -31,6 +31,12 @@
     <%= form.select :condition, options_for_select(Article.conditions.keys.to_a) %>
   </div>
 
+  <h3>Categories</h3>
+  <div class="form-group">
+      <%= form.label :categories, class: "control-label" %>
+      <%= form.collection_select(:categories_ids, @categories,:id, :name, {}, {multiple: true, class: 'form-control js-states'}) %>
+  </div>
+
   <div class="field">
     <%= form.label :images %>
     <%= form.file_field :images, :multiple => true %>
