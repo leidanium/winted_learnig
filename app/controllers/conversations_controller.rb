@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /conversations or /conversations.json
   def index
@@ -12,17 +13,8 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/new
   def new
-    @conversation = Conversation.new
-  end
-
-  # GET /conversations/1/edit
-  def edit
-  end
-
-  # POST /conversations or /conversations.json
-  def create
     @conversation = Conversation.new(conversation_params)
-
+    @conversation.c_buyer_id = current_user.id
     respond_to do |format|
       if @conversation.save
         format.html { redirect_to conversation_url(@conversation), notice: "Conversation was successfully created." }
@@ -33,6 +25,25 @@ class ConversationsController < ApplicationController
       end
     end
   end
+
+  # GET /conversations/1/edit
+  def edit
+  end
+
+  # POST /conversations or /conversations.json
+  # def create
+  #   @conversation = Conversation.new(conversation_params)
+
+  #   respond_to do |format|
+  #     if @conversation.save
+  #       format.html { redirect_to conversation_url(@conversation), notice: "Conversation was successfully created." }
+  #       format.json { render :show, status: :created, location: @conversation }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @conversation.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /conversations/1 or /conversations/1.json
   def update
@@ -65,6 +76,6 @@ class ConversationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def conversation_params
-      params.require(:conversation).permit(:article_id, :c_seller_id, :c_buyer_id)
+      params.permit(:article_id, :c_seller_id, :c_buyer_id)
     end
 end

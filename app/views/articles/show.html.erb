@@ -55,7 +55,11 @@
   <%= @article.condition %>
 </p>
 
+
 <%= link_to 'Vendeur', public_seller_path(id: @article.user_id) %>
+<br/>
+<%= link_to 'Lancer la conversation', new_conversation_path(article_id: @article.id, c_seller_id: @article.user_id) %>
+<br/>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
