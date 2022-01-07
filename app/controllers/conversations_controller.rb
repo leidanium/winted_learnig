@@ -4,11 +4,12 @@ class ConversationsController < ApplicationController
 
   # GET /conversations or /conversations.json
   def index
-    @conversations = Conversation.all
+    @conversations = Conversation.includes(:article, :c_buyer, :c_seller).where(c_buyer_id: current_user.id, c_seller_id: current_user.id)
   end
 
   # GET /conversations/1 or /conversations/1.json
   def show
+    @messages = ConvMessage.includes(:user).where(conversation_id: @conversation.id)
   end
 
   # GET /conversations/new

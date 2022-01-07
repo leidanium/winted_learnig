@@ -1,19 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Article:</strong>
-  <%= @conversation.article_id %>
-</p>
-
-<p>
-  <strong>C seller:</strong>
-  <%= @conversation.c_seller_id %>
-</p>
-
-<p>
-  <strong>C buyer:</strong>
-  <%= @conversation.c_buyer_id %>
-</p>
-
 <%= link_to 'Edit', edit_conversation_path(@conversation) %> |
 <%= link_to 'Back', conversations_path %>
+<p>
+  <strong>Article:</strong>
+  <%= @conversation.article.name %>
+</p>
+
+<div class="row">
+  <div class="col">
+    <div class="chat">
+      <% @messages.each do |m|%>
+        <div class="message <%= current_user.id == m.user_id ? "my-message" : "his-message"%>">
+          <%= m.message %>
+        </div>  
+      <% end %>
+    </div>
+    
+    <%= form_with url: conv_messages_path, remote: true do |form| %>
+      <%= form.hidden_field :conversation_id, value: @conversation.id %>
+      <%= form.text_area :message, id: "new_conv_message" %>
+      <%= form.submit "Envoyer", class: "btn btn-primary" %>
+    <% end %>
+
+    
+
+  </div>
+</div>
+
+

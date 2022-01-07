@@ -1,5 +1,6 @@
 class ConvMessagesController < ApplicationController
-  before_action :set_conv_message, only: %i[ show edit update destroy ]
+  before_action :set_conv_message, only: %i[ show edit update destroy]
+  before_action :authenticate_user!
 
   # GET /conv_messages or /conv_messages.json
   def index
@@ -21,17 +22,19 @@ class ConvMessagesController < ApplicationController
 
   # POST /conv_messages or /conv_messages.json
   def create
-    @conv_message = ConvMessage.new(conv_message_params)
-
-    respond_to do |format|
-      if @conv_message.save
-        format.html { redirect_to conv_message_url(@conv_message), notice: "Conv message was successfully created." }
-        format.json { render :show, status: :created, location: @conv_message }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @conv_message.errors, status: :unprocessable_entity }
-      end
-    end
+    @conv_message = ConvMessage.new(conv_message_params) 
+    @conv_message.user_id = current_user.id
+    @conv_message.save
+    # respond_to do |format|
+    #   if @conv_message.save
+    #     format.html { redirect_to conversation_path(@conv_message.conversation), notice: "Conv message was successfully created." }
+    #     format.json { render :show, status: :created, location: @conv_message }
+    #     format.js
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @conv_message.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /conv_messages/1 or /conv_messages/1.json
@@ -65,6 +68,6 @@ class ConvMessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def conv_message_params
-      params.require(:conv_message).permit(:conversation_id, :user, :message)
+      params.permit(:conversation_id, :message)
     end
 end
