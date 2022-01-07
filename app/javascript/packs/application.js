@@ -13,8 +13,6 @@ import $ from 'jquery';
 global.$ = jQuery;
 
 
-
-
 import 'popper.js'
 import 'bootstrap'
 import '../stylesheets/application'

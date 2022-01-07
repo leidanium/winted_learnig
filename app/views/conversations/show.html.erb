@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="col">
-    <div class="chat">
+    <div class="chat" data-channel-subscribe="conversation" data-conversation-id="<%= @conversation.id %>">
       <% @messages.each do |m|%>
         <div class="message <%= current_user.id == m.user_id ? "my-message" : "his-message"%>">
           <%= m.message %>
@@ -17,14 +17,30 @@
       <% end %>
     </div>
     
-    <%= form_with url: conv_messages_path, remote: true do |form| %>
+    <%= form_with url: conv_messages_path, id: "new_conv_form" , remote: true do |form| %>
       <%= form.hidden_field :conversation_id, value: @conversation.id %>
       <%= form.text_area :message, id: "new_conv_message" %>
       <%= form.submit "Envoyer", class: "btn btn-primary" %>
     <% end %>
+  </div>
+</div>
 
-    
+<div class="d-none" data-role="message-template">
+  <div class="chat-message-container">
+    <div class="row no-gutters">
+      <div class="col-auto text-center">
+      </div>
 
+      <div class="col">
+        <div class="message-content">
+          <p class="mb-1" data-role="message-text"></p>
+
+          <div class="text-right">
+            <small data-role="message-date"></small>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

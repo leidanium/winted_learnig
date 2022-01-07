@@ -25,6 +25,8 @@ class ConvMessagesController < ApplicationController
     @conv_message = ConvMessage.new(conv_message_params) 
     @conv_message.user_id = current_user.id
     @conv_message.save
+
+    ConversationChannel.broadcast_to @conv_message.conversation, @conv_message
     # respond_to do |format|
     #   if @conv_message.save
     #     format.html { redirect_to conversation_path(@conv_message.conversation), notice: "Conv message was successfully created." }
