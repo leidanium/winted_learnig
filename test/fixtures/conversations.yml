@@ -2,10 +2,10 @@
 
 one:
   article: one
-  user: one
-  user: one
+  c_seller: one
+  c_buyer: one
 
 two:
   article: two
-  user: two
-  user: two
+  c_seller: two
+  c_buyer: two

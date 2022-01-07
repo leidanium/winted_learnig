@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :articles
 
   has_one_attached :avatar
+
+  has_many :c_sellers, class_name: 'Conversation', foreign_key: 'c_seller_id'
+  has_many :c_buyers, class_name: 'Conversation', foreign_key: 'c_buyer_id'
 end

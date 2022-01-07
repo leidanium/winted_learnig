@@ -15,7 +15,8 @@ class ConversationsTest < ApplicationSystemTestCase
     click_on "New Conversation"
 
     fill_in "Article", with: @conversation.article_id
-    fill_in "User", with: @conversation.user_id
+    fill_in "C buyer", with: @conversation.c_buyer_id
+    fill_in "C seller", with: @conversation.c_seller_id
     click_on "Create Conversation"
 
     assert_text "Conversation was successfully created"
@@ -27,7 +28,8 @@ class ConversationsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Article", with: @conversation.article_id
-    fill_in "User", with: @conversation.user_id
+    fill_in "C buyer", with: @conversation.c_buyer_id
+    fill_in "C seller", with: @conversation.c_seller_id
     click_on "Update Conversation"
 
     assert_text "Conversation was successfully updated"

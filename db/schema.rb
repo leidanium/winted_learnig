@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_155756) do
+ActiveRecord::Schema.define(version: 2022_01_07_081944) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -104,6 +104,27 @@ ActiveRecord::Schema.define(version: 2022_01_06_155756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "conv_messages", force: :cascade do |t|
+    t.integer "conversation_id", null: false
+    t.integer "user_id"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_conv_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_conv_messages_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "c_seller_id", null: false
+    t.integer "c_buyer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_conversations_on_article_id"
+    t.index ["c_buyer_id"], name: "index_conversations_on_c_buyer_id"
+    t.index ["c_seller_id"], name: "index_conversations_on_c_seller_id"
+  end
+
   create_table "solds", force: :cascade do |t|
     t.bigint "article_id", null: false
     t.bigint "user_id", null: false
@@ -143,6 +164,10 @@ ActiveRecord::Schema.define(version: 2022_01_06_155756) do
   add_foreign_key "articles", "users"
   add_foreign_key "articles_categories", "articles"
   add_foreign_key "articles_categories", "categories"
+  add_foreign_key "conv_messages", "conversations"
+  add_foreign_key "conversations", "articles"
+  add_foreign_key "conversations", "users", column: "c_buyer_id"
+  add_foreign_key "conversations", "users", column: "c_seller_id"
   add_foreign_key "solds", "articles"
   add_foreign_key "solds", "users"
 end

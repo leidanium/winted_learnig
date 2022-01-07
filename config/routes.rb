@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :conv_messages
   resources :conversations
+  resources :conv_messages
   get 'public/seller'
   resources :solds do
     collection do
