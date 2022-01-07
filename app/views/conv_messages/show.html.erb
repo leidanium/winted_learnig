@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Conversation:</strong>
+  <%= @conv_message.conversation_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @conv_message.user %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @conv_message.message %>
+</p>
+
+<%= link_to 'Edit', edit_conv_message_path(@conv_message) %> |
+<%= link_to 'Back', conv_messages_path %>
