@@ -8,7 +8,7 @@ ruby '3.0.0'
 # RAILS VERSION TOCHANGE
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -33,6 +33,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 
 gem 'redis'
+
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
